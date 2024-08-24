@@ -13,19 +13,12 @@ test "zarn init command" {
     var tmp_dir = std.testing.tmpDir(.{});
     defer tmp_dir.cleanup();
 
-    // Save the current working directory
-    const original_cwd = fs.cwd();
-    defer original_cwd.setAsCwd() catch {};
-
-    // Change the current working directory to the temporary directory
-    try tmp_dir.dir.setAsCwd();
-
     std.debug.print("Running cli.run\n", .{});
     try cli.run(allocator, "test_project", "1.0.0");
 
     std.debug.print("Checking for zarn.toml\n", .{});
     // Check if zarn.toml file was created
-    const file = fs.cwd().openFile("zarn.toml", .{}) catch |err| {
+    const file = tmp_dir.dir.openFile("zarn.toml", .{}) catch |err| {
         std.debug.print("Error opening zarn.toml: {}\n", .{err});
         return err;
     };

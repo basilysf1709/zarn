@@ -1,7 +1,7 @@
 const std = @import("std");
 const Package = @import("package").Package;
 
-pub fn init(allocator: std.mem.Allocator, name: []const u8, version: []const u8) !void {
+pub fn init(allocator: std.mem.Allocator, dir: std.fs.Dir, name: []const u8, version: []const u8) !void {
     const stdout = std.io.getStdOut().writer();
 
     try stdout.print("Initializing new project\n", .{});
@@ -11,8 +11,8 @@ pub fn init(allocator: std.mem.Allocator, name: []const u8, version: []const u8)
 
     try stdout.print("Created package: {s} v{s}\n", .{ package.name, package.version });
 
-    // Write package info to zarn.toml
-    const file = try std.fs.cwd().createFile("zarn.toml", .{});
+    // Write package info to zarn.toml in the specified directory
+    const file = try dir.createFile("zarn.toml", .{});
     defer file.close();
 
     const writer = file.writer();

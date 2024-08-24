@@ -25,7 +25,7 @@ pub fn run(allocator: std.mem.Allocator, test_name: ?[]const u8, test_version: ?
         const version = test_version orelse if (args.len > 3) args[3] else try prompt(allocator, "Version (0.1.0): ");
         std.debug.print("Version: {s}\n", .{version});
         std.debug.print("Calling commands.init\n", .{});
-        try commands.init(allocator, name, version);
+        try commands.init(allocator, std.fs.cwd(), name, version);
         std.debug.print("commands.init completed\n", .{});
     } else {
         std.debug.print("Unknown command: {s}\n", .{command});
