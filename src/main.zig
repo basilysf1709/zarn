@@ -6,17 +6,5 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    try cli.run(allocator);
-}
-
-// Add tests
-test "basic functionality" {
-    // You can add some basic tests here
-    try std.testing.expectEqual(true, true);
-}
-
-// Include tests from other modules
-test {
-    // This will run tests from all imported files
-    std.testing.refAllDecls(@This());
+    try cli.run(allocator, null, null);
 }

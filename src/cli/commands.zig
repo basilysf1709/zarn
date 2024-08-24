@@ -1,24 +1,10 @@
 const std = @import("std");
-const Builder = @import("../build/builder.zig").Builder;
-const Package = @import("../package/package.zig").Package;
+const Package = @import("package").Package;
 
-pub fn install(allocator: std.mem.Allocator, args: []const []const u8) !void {
-    std.debug.print("Installing packages: {s}\n", .{args});
-    var builder = try Builder.init(allocator);
-    defer builder.deinit();
-    try builder.buildDependencies();
-}
-
-pub fn init(allocator: std.mem.Allocator) !void {
+pub fn init(allocator: std.mem.Allocator, name: []const u8, version: []const u8) !void {
     const stdout = std.io.getStdOut().writer();
 
     try stdout.print("Initializing new project\n", .{});
-
-    const name = try prompt(allocator, "Project name: ");
-    defer allocator.free(name);
-
-    const version = try prompt(allocator, "Version (0.1.0): ");
-    defer allocator.free(version);
 
     var package = try Package.init(allocator, name, if (version.len > 0) version else "0.1.0");
     defer package.deinit();
