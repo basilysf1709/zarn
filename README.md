@@ -4,6 +4,7 @@
 
 ### Phase #1:
 <img width="1006" alt="Screenshot 1446-02-21 at 1 49 26 AM" src="https://github.com/user-attachments/assets/31cd4160-5606-4e0c-b70e-920413fb6caa">
+
 - Designed the diagram above
 - Setting up build system
 - Ran into issues with changing directories in the test system
