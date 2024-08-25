@@ -3,13 +3,18 @@
 ## Documentation
 
 ### Phase #1:
-<img width="1006" alt="Screenshot 1446-02-21 at 1 49 26 AM" src="https://github.com/user-attachments/assets/31cd4160-5606-4e0c-b70e-920413fb6caa">
+<img width="687" alt="Screenshot 1446-02-21 at 4 26 37 PM" src="https://github.com/user-attachments/assets/cd9c96db-22a5-4c63-b210-f9599138bd68">
 
 - Designed the diagram above
 - Setting up build system
 - Ran into issues with changing directories in the test system
 - Connected commands.zig to cli.zig, which is then connected to cli_tests.zig for testing
 
+### Phase #2:
+<img width="665" alt="Screenshot 1446-02-21 at 4 27 15 PM" src="https://github.com/user-attachments/assets/9141de02-9d8c-4d68-a9df-79fe669f69cf">
+
+- Trying to understand zig build
+- Added a test to see if zarn.toml file with "init" command works properly
 
 Zarn is a package manager written in Zig.
 
