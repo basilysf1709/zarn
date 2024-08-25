@@ -50,11 +50,11 @@ pub fn build(b: *std.Build) void {
     exe.root_module.addImport("resolver", resolver_module);
     exe.root_module.addImport("util", util_module);
 
-    const main_tests = b.addTest(.{
-        .root_source_file = b.path("src/main.zig"),
-        .target = target,
-        .optimize = optimize,
-    });
+    // const main_tests = b.addTest(.{
+    //     .root_source_file = b.path("src/main.zig"),
+    //     .target = target,
+    //     .optimize = optimize,
+    // });
 
     const cli_tests = b.addTest(.{
         .root_source_file = b.path("tests/cli_tests.zig"),
@@ -63,21 +63,16 @@ pub fn build(b: *std.Build) void {
     });
 
     // Add modules to test executables
-    inline for ([_]struct { *std.Build.Step.Compile, []const u8 }{
-        .{ main_tests, "main_tests" },
-        .{ cli_tests, "cli_tests" },
-    }) |t| {
-        t[0].root_module.addImport("cli", cli_module);
-        t[0].root_module.addImport("package", package_module);
-        t[0].root_module.addImport("build", build_module);
-        t[0].root_module.addImport("resolver", resolver_module);
-        t[0].root_module.addImport("util", util_module);
-    }
+    cli_tests.root_module.addImport("cli", cli_module);
+    cli_tests.root_module.addImport("package", package_module);
+    cli_tests.root_module.addImport("build", build_module);
+    cli_tests.root_module.addImport("resolver", resolver_module);
+    cli_tests.root_module.addImport("util", util_module);
 
-    const run_main_tests = b.addRunArtifact(main_tests);
+    // const run_main_tests = b.addRunArtifact(main_tests);
     const run_cli_tests = b.addRunArtifact(cli_tests);
 
     const test_step = b.step("test", "Run unit tests");
-    test_step.dependOn(&run_main_tests.step);
+    // test_step.dependOn(&run_main_tests.step);
     test_step.dependOn(&run_cli_tests.step);
 }

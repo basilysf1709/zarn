@@ -6,5 +6,6 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    try cli.run(allocator, null, null);
+    const cwd = std.fs.cwd();
+    try cli.run(allocator, cwd, "zarn_test", "1.0.0");
 }

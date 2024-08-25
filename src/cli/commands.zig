@@ -9,7 +9,7 @@ pub fn init(allocator: std.mem.Allocator, dir: std.fs.Dir, name: []const u8, ver
     var package = try Package.init(allocator, name, if (version.len > 0) version else "0.1.0");
     defer package.deinit();
 
-    try stdout.print("Created package: {s} v{s}\n", .{ package.name, package.version });
+    // try stdout.print("Created package: {s} v{s}\n", .{ package.name, package.version });
 
     // Write package info to zarn.toml in the specified directory
     const file = try dir.createFile("zarn.toml", .{});
@@ -20,6 +20,7 @@ pub fn init(allocator: std.mem.Allocator, dir: std.fs.Dir, name: []const u8, ver
         \\[package]
         \\name = "{s}"
         \\version = "{s}"
+        \\dependencies = []
         \\
     , .{ package.name, package.version });
 
